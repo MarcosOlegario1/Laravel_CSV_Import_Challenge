@@ -7,7 +7,7 @@
  ```sh
 cp .env.example .env
 ```
- - Ir até a pasta Nginx/sites/ e dentro do arquivo "default.conf"
+ - Ir até a pasta Nginx/sites/ e dentro do arquivo "default.conf" altere a linha 13 adicionando o nome da pasta
  ```sh
 root /var/www/NomeDaPastaDoProjeto/public;
 ```
@@ -30,6 +30,7 @@ docker ps
  - Voltando ao terminal do container, rode os seguintes comandos:
  ```sh
 npm i && composer install
+php artisan key:generate
 php artisan migrate
 ```
  - Acesse localhost/
