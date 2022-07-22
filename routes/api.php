@@ -19,6 +19,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('customers', 'API\CustomersAPIController@show');
-Route::get('gender-graph', 'API\CustomersAPIController@genderGraphic');
-// Route::get('emails', 'API\CustomersAPIController@show');
-// Route::get('lastname', 'API\CustomersAPIController@show');
+Route::get('destroydata', 'API\CustomersAPIController@destroy');

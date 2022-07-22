@@ -27,7 +27,7 @@
                     {{ config('app.name', 'Importação CSV') }}
                 </a>
             </div>
-            <div class="container" style="margin-left: 50%;">
+            <div class="container" style="justify-content: right;">
                 <a class="navbar-brand" href="{{ url('/customers/import') }}">
                     {{ config('app.import', 'Importar CSV') }}
                 </a>

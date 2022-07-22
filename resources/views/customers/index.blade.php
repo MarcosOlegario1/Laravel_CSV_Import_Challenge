@@ -5,7 +5,10 @@
     <div class="row justify-content-center">
         <div class="col-12">
             <div class="card">
-                <div class="card-header" style="font-size: 2em">Dados dos Clientes!</div>
+                <div class="card-header" style="font-size: 2em">
+                    <a>Todos os dados dos clientes!</a>
+                    <button @click="destroyData" type="submit" class="btn btn-danger" style="float: right; margin-top:5px;">Apagar dados</button>
+                </div>
 
                 <div class="table-responsive">
                     <table class="table table-bordered">
@@ -24,7 +27,7 @@
                         </thead>
 
                         <tbody>
-                            <tr v-for="(customer, index) in customers">
+                            <tr v-for="(customer, index) in customers.data">
                                 <th>@{{customer.first_name}}</th>
                                 <th>@{{customer.last_name}}</th>
                                 <th>@{{customer.email}}</th>
@@ -58,6 +61,58 @@
         </div>
     </div>
 </div>
+<span style="padding: 10px;"></span>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-header" style="font-size: 2em">Tabela de sobrenome cliente</div>
+
+                <div class="table">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Clientes com sobrenome</th>
+                                <th>Clientes sem sobrenome</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <th>@{{customerswln}}</th>
+                                <th>@{{customerswtln}}</th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <div class="card-header" style="font-size: 2em">Tabela de genero cliente</div>
+
+                <div class="table">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Cliente com genero</th>
+                                <th>Cliente sem genero</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <th>@{{customerswg}}</th>
+                                <th>@{{customerswtg}}</th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 @endsection
 
 @push('scripts')
@@ -70,6 +125,10 @@
             return{
             current_page: 1,
             customers: [],
+            customerswg: 0,
+            customerswtg: 0,
+            customerswln: 0,
+            customerswtln: 0,
             }
         },
         methods: {
@@ -84,12 +143,23 @@
                     this.fetchCustomers();
                 }
             },
+            async destroyData() {
+                try{
+                    const res = await fetch(`/api/destroydata`);
+                } catch (error) {
+                    console.log(error)
+                }
+            },
             async fetchCustomers() {
                 try {
                     const res = await fetch(`/api/customers?page=${this.current_page}`);
                     const data = await res.json();
-                    this.customers = data.data;
-                    console.log(this.customers);
+                    this.customers     = data.customers;
+                    this.customerswg   = data.customerswg;
+                    this.customerswtg  = data.customerswtg;
+                    this.customerswln  = data.customerswln;
+                    this.customerswtln = data.customerswtln;
+                    console.log(data);
                 } catch (error) {
                     console.log(error)
                 }
@@ -99,5 +169,6 @@
             this.fetchCustomers();
         }
     });
+
 </script>
 @endpush

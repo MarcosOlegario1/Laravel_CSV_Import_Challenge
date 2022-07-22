@@ -22,7 +22,7 @@
                         </div>
 
                         <div class="row" style="margin-top: 20px;justify-content: center;">
-                            <button type="submit" class="btn btn-dark" style="width: 60%">Importar</button>
+                            <button type="submit" class="btn btn-success" style="width: 60%">Importar</button>
                         </div>
                    </form>
                 </button>
