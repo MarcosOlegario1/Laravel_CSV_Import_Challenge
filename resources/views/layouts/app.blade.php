@@ -27,12 +27,12 @@
                     {{ config('app.name', 'Importação CSV') }}
                 </a>
             </div>
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/customers/index') }}">
-                    {{ config('app.index', 'Dados') }}
-                </a>
+            <div class="container" style="margin-left: 50%;">
                 <a class="navbar-brand" href="{{ url('/customers/import') }}">
-                    {{ config('app.import', 'Importar') }}
+                    {{ config('app.import', 'Importar CSV') }}
+                </a>
+                <a class="navbar-brand" href="{{ url('/customers/index') }}">
+                    {{ config('app.index', 'Tabelas de dados') }}
                 </a>
             </div>
         </nav>

@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-{{-- <div class="container">
+<div class="container">
     <div class="row justify-content-center">
         <div class="col-12">
             <div class="card">
-                <div class="card-header">Dados dos Customers!</div>
+                <div class="card-header" style="font-size: 2em">Dados dos Clientes!</div>
 
                 <div class="table-responsive">
                     <table class="table table-bordered">
@@ -24,7 +24,7 @@
                         </thead>
 
                         <tbody>
-                            <tr v-for="(customer, index) in customers.data">
+                            <tr v-for="(customer, index) in customers">
                                 <th>@{{customer.first_name}}</th>
                                 <th>@{{customer.last_name}}</th>
                                 <th>@{{customer.email}}</th>
@@ -57,13 +57,6 @@
             </div>
         </div>
     </div>
-</div> --}}
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-12">
-                <gender-graphic/>
-        </div>
-    </div>
 </div>
 @endsection
 
@@ -73,9 +66,11 @@
 <script>
     var app = new Vue({
         el: '#app',
-        data: {
+        data() {
+            return{
             current_page: 1,
-            customers: []
+            customers: [],
+            }
         },
         methods: {
             nextPage() {
@@ -90,15 +85,15 @@
                 }
             },
             async fetchCustomers() {
-                // try {
-                //     const res = await fetch(`/api/customers?page=${this.current_page}`)
-                //     const data = await res.json()
-                //     this.customers = data.customers;
-                //     console.log(data)
-                // } catch (error) {
-                //     console.log(error)
-                // }
-            }
+                try {
+                    const res = await fetch(`/api/customers?page=${this.current_page}`);
+                    const data = await res.json();
+                    this.customers = data.data;
+                    console.log(this.customers);
+                } catch (error) {
+                    console.log(error)
+                }
+            },
         },
         mounted() {
             this.fetchCustomers();
